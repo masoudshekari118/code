@@ -1,123 +1,190 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>مسعود شکری - وب‌سایت شخصی</title>
+<!-- فونت ایران سنس وب (از وب فونت گوگل فارسی جایگزین) -->
 <style>
-  /* Reset */
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn/Vazirmatn-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn/Vazirmatn-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+  }
   * {
     margin: 0; padding: 0; box-sizing: border-box;
-    font-family: 'Tahoma', sans-serif;
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
   }
   body {
-    background: #f5f7fa;
-    color: #333;
-    line-height: 1.6;
+    background: #f9faff;
+    color: #222;
+    line-height: 1.7;
     scroll-behavior: smooth;
+    direction: rtl;
   }
   header {
     position: fixed;
-    top: 0; left: 0; right: 0;
-    background: #222;
-    color: #fff;
+    top: 0; right: 0; left: 0;
+    background: #0f3057;
+    color: #e7ecef;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 25px;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 3px 7px rgba(15,48,87,0.6);
   }
   header h1 {
-    font-size: 1.2rem;
-    font-weight: normal;
+    font-size: 1.4rem;
+    font-weight: 700;
+    user-select: none;
   }
   nav {
     display: flex;
-    gap: 15px;
+    gap: 18px;
+    flex-wrap: wrap;
   }
   nav a {
-    color: #ddd;
+    color: #bbdefb;
     text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: background 0.3s, color 0.3s;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+    user-select: none;
+    white-space: nowrap;
   }
   nav a:hover,
   nav a.active {
-    background: #4caf50;
+    background-color: #2196f3;
     color: #fff;
+    box-shadow: 0 2px 8px rgba(33,150,243,0.6);
   }
   main {
     max-width: 900px;
-    margin: 80px auto 40px;
+    margin: 85px auto 40px;
     padding: 0 20px;
   }
-  section {
-    margin-bottom: 50px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
+  .accordion-item {
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 3px 8px rgb(0 0 0 / 0.1);
+    margin-bottom: 18px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    transition: box-shadow 0.3s;
   }
-  section:last-child {
-    border: none;
-    margin-bottom: 80px;
+  .accordion-item:hover {
+    box-shadow: 0 6px 16px rgb(33 150 243 / 0.3);
   }
-  section h2 {
-    margin-bottom: 15px;
-    font-size: 1.8rem;
-    color: #2c3e50;
-    border-left: 5px solid #4caf50;
-    padding-left: 10px;
+  .accordion-header {
+    cursor: pointer;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: #e3f2fd;
+    color: #0d47a1;
+    user-select: none;
+    transition: background-color 0.3s;
   }
-  .intro {
-    font-size: 1.1rem;
+  .accordion-header:hover {
+    background: #bbdefb;
+  }
+  .accordion-header.active {
+    background: #2196f3;
+    color: white;
+    box-shadow: 0 0 10px #2196f3aa;
+  }
+  .accordion-header svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    transition: transform 0.3s;
+  }
+  .accordion-header.active svg {
+    transform: rotate(180deg);
+  }
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    background: #fafafa;
+    color: #333;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+  }
+  .accordion-content.open {
+    padding: 15px 20px 20px 20px;
+    max-height: 1000px; /* big enough for content */
+  }
+  .accordion-content ul {
+    list-style-position: inside;
+    padding-right: 10px;
     color: #555;
-    margin-bottom: 30px;
   }
-  ul {
-    list-style: inside disc;
-    color: #444;
+  .accordion-content a {
+    color: #1565c0;
+    text-decoration: none;
+    transition: color 0.3s;
   }
-  /* Contact form */
+  .accordion-content a:hover {
+    text-decoration: underline;
+    color: #0d47a1;
+  }
   form {
-    max-width: 500px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 16px;
+    max-width: 480px;
   }
   form label {
-    font-weight: bold;
-    color: #333;
+    font-weight: 600;
+    color: #222;
+    user-select: none;
   }
   form input, form textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
+    border: 1.5px solid #ccc;
+    padding: 12px;
     font-size: 1rem;
     resize: vertical;
+    transition: border-color 0.3s;
+  }
+  form input:focus, form textarea:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 8px #2196f3aa;
   }
   form button {
-    background: #4caf50;
-    color: white;
+    background-color: #0f3057;
+    color: #e7ecef;
+    font-weight: 700;
+    padding: 14px 0;
     border: none;
-    padding: 12px;
-    border-radius: 5px;
-    font-size: 1rem;
+    border-radius: 12px;
     cursor: pointer;
-    transition: background 0.3s;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
   }
   form button:hover {
-    background: #45a049;
+    background-color: #1976d2;
   }
-  /* Responsive */
-  @media (max-width: 600px) {
-    nav {
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+  @media (max-width: 650px) {
     main {
-      margin: 90px 15px 40px;
+      margin: 100px 15px 40px;
+    }
+    .accordion-header {
+      font-size: 1.3rem;
     }
   }
 </style>
@@ -138,80 +205,136 @@
 </header>
 
 <main>
-  <section id="about">
-    <h2>درباره من</h2>
-    <p class="intro">
-      سلام، من مسعود شکری هستم.  
-      تخصص من در حوزه منابع انسانی، سیستم‌های نوآوری و خلاقیت است.  
-      علاقه‌مند به توسعه مهارت‌ها و خلق ایده‌های نو در سازمان‌ها و تیم‌ها.
-    </p>
+  <section class="accordion-item" id="about">
+    <div class="accordion-header active">
+      درباره من
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="accordion-content open">
+      <p>
+        سلام، من مسعود شکری هستم.<br />
+        تخصص من در حوزه منابع انسانی، سیستم‌های نوآوری و خلاقیت است.<br />
+        علاقه‌مند به توسعه مهارت‌ها و خلق ایده‌های نو در سازمان‌ها و تیم‌ها.
+      </p>
+    </div>
   </section>
 
-  <section id="education">
-    <h2>تحصیلات</h2>
-    <ul>
-      <li>کارشناسی ارشد مدیریت منابع انسانی - دانشگاه تهران</li>
-      <li>دوره‌های تخصصی سیستم‌های نوآوری و خلاقیت</li>
-      <li>کارگاه‌های توسعه مهارت‌های رهبری و تیم‌سازی</li>
-    </ul>
+  <section class="accordion-item" id="education">
+    <div class="accordion-header">
+      تحصیلات
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="accordion-content">
+      <ul>
+        <li>کارشناسی ارشد مدیریت منابع انسانی - دانشگاه تهران</li>
+        <li>دوره‌های تخصصی سیستم‌های نوآوری و خلاقیت</li>
+        <li>کارگاه‌های توسعه مهارت‌های رهبری و تیم‌سازی</li>
+      </ul>
+    </div>
   </section>
 
-  <section id="work">
-    <h2>سوابق شغلی</h2>
-    <ul>
-      <li>مدیر منابع انسانی در شرکت فناوران نوین - ۱۳۹۸ تا حالا</li>
-      <li>مشاور سیستم‌های نوآوری در استارتاپ X - ۱۳۹۵ تا ۱۳۹۸</li>
-      <li>کارشناس توسعه منابع انسانی در شرکت Y - ۱۳۹۲ تا ۱۳۹۵</li>
-    </ul>
+  <section class="accordion-item" id="work">
+    <div class="accordion-header">
+      سوابق شغلی
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="accordion-content">
+      <ul>
+        <li>مدیر منابع انسانی در شرکت فناوران نوین - ۱۳۹۸ تا حالا</li>
+        <li>مشاور سیستم‌های نوآوری در استارتاپ X - ۱۳۹۵ تا ۱۳۹۸</li>
+        <li>کارشناس توسعه منابع انسانی در شرکت Y - ۱۳۹۲ تا ۱۳۹۵</li>
+      </ul>
+    </div>
   </section>
 
-  <section id="experience">
-    <h2>تجربیات</h2>
-    <ul>
-      <li>پیاده‌سازی سیستم‌های نوآوری در شرکت‌های بزرگ</li>
-      <li>برگزاری کارگاه‌های خلاقیت و نوآوری برای تیم‌ها</li>
-      <li>توسعه برنامه‌های آموزشی منابع انسانی</li>
-    </ul>
+  <section class="accordion-item" id="experience">
+    <div class="accordion-header">
+      تجربیات
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="accordion-content">
+      <ul>
+        <li>پیاده‌سازی سیستم‌های نوآوری در شرکت‌های بزرگ</li>
+        <li>برگزاری کارگاه‌های خلاقیت و نوآوری برای تیم‌ها</li>
+        <li>توسعه برنامه‌های آموزشی منابع انسانی</li>
+      </ul>
+    </div>
   </section>
 
-  <section id="notes">
-    <h2>یادداشت‌ها</h2>
-    <ul>
-      <li>نقش نوآوری در بهبود بهره‌وری سازمان</li>
-      <li>چالش‌های مدیریت منابع انسانی در عصر دیجیتال</li>
-      <li>راهکارهای افزایش انگیزه کارکنان</li>
-    </ul>
+  <section class="accordion-item" id="notes">
+    <div class="accordion-header">
+      یادداشت‌ها
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="accordion-content">
+      <ul>
+        <li>نقش نوآوری در بهبود بهره‌وری سازمان</li>
+        <li>چالش‌های مدیریت منابع انسانی در عصر دیجیتال</li>
+        <li>راهکارهای افزایش انگیزه کارکنان</li>
+      </ul>
+    </div>
   </section>
 
-  <section id="articles">
-    <h2>مقالات علمی</h2>
-    <ul>
-      <li><a href="https://example.com/article1" target="_blank" rel="noopener noreferrer">نوآوری در سیستم‌های منابع انسانی</a></li>
-      <li><a href="https://example.com/article2" target="_blank" rel="noopener noreferrer">خلاقیت و تأثیر آن بر توسعه سازمانی</a></li>
-      <li><a href="https://example.com/article3" target="_blank" rel="noopener noreferrer">مدیریت تغییر در سازمان‌های پویا</a></li>
-    </ul>
+  <section class="accordion-item" id="articles">
+    <div class="accordion-header">
+      مقالات علمی
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="accordion-content">
+      <ul>
+        <li><a href="https://example.com/article1" target="_blank" rel="noopener noreferrer">نوآوری در سیستم‌های منابع انسانی</a></li>
+        <li><a href="https://example.com/article2" target="_blank" rel="noopener noreferrer">خلاقیت و تأثیر آن بر توسعه سازمانی</a></li>
+        <li><a href="https://example.com/article3" target="_blank" rel="noopener noreferrer">مدیریت تغییر در سازمان‌های پویا</a></li>
+      </ul>
+    </div>
   </section>
 
-  <section id="contact">
-    <h2>تماس با من</h2>
-    <form onsubmit="event.preventDefault(); alert('با تشکر از پیام شما! در اسرع وقت پاسخ خواهم داد.'); this.reset();">
-      <label for="name">نام:</label>
-      <input type="text" id="name" name="name" placeholder="نام خود را وارد کنید" required />
-      
-      <label for="email">ایمیل:</label>
-      <input type="email" id="email" name="email" placeholder="ایمیل شما" required />
-      
-      <label for="message">پیام:</label>
-      <textarea id="message" name="message" rows="4" placeholder="پیام خود را بنویسید" required></textarea>
-      
-      <button type="submit">ارسال پیام</button>
-    </form>
+  <section class="accordion-item" id="contact">
+    <div class="accordion-header">
+      تماس با من
+      <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+    </div>
+    <div class="accordion-content">
+      <form onsubmit="event.preventDefault(); alert('با تشکر از پیام شما! در اسرع وقت پاسخ خواهم داد.'); this.reset();">
+        <label for="name">نام:</label>
+        <input type="text" id="name" name="name" placeholder="نام خود را وارد کنید" required />
+        
+        <label for="email">ایمیل:</label>
+        <input type="email" id="email" name="email" placeholder="ایمیل شما" required />
+        
+        <label for="message">پیام:</label>
+        <textarea id="message" name="message" rows="4" placeholder="پیام خود را بنویسید" required></textarea>
+        
+        <button type="submit">ارسال پیام</button>
+      </form>
+    </div>
   </section>
 </main>
 
 <script>
-  // فعال کردن لینک منوی فعال هنگام اسکرول
-  const sections = document.querySelectorAll('section');
+  // مدیریت باز و بسته شدن آکاردئون
+  const headers = document.querySelectorAll('.accordion-header');
+
+  headers.forEach(header => {
+    header.addEventListener('click', () => {
+      const currentlyActive = document.querySelector('.accordion-header.active');
+      if (currentlyActive && currentlyActive !== header) {
+        currentlyActive.classList.remove('active');
+        currentlyActive.nextElementSibling.classList.remove('open');
+      }
+
+      header.classList.toggle('active');
+      header.nextElementSibling.classList.toggle('open');
+
+      // اگر آیتم فعال شد، اسکرول می‌کنه بهش (نرمی)
+      if (header.classList.contains('active')) {
+        header.scrollIntoView({behavior: "smooth", block: "start"});
+      }
+    });
+  });
+
+  // منو: لینک فعال با اسکرول صفحه
+  const sections = document.querySelectorAll('section.accordion-item');
   const navLinks = document.querySelectorAll('nav a');
 
   window.addEventListener('scroll', () => {
@@ -219,15 +342,15 @@
     const scrollY = window.pageYOffset;
 
     sections.forEach(section => {
-      const sectionTop = section.offsetTop - 70;
-      if(scrollY >= sectionTop) {
+      const sectionTop = section.offsetTop - 80;
+      if (scrollY >= sectionTop) {
         current = section.getAttribute('id');
       }
     });
 
     navLinks.forEach(link => {
       link.classList.remove('active');
-      if(link.getAttribute('href') === '#' + current) {
+      if (link.getAttribute('href') === '#' + current) {
         link.classList.add('active');
       }
     });
